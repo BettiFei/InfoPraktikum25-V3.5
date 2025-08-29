@@ -1,11 +1,19 @@
 extends CharacterBody2D
 
 
+# set player stats:
+@export var SPEED = 300.0
+@export var JUMP_VELOCITY = -400.0
+
+# variables to match animations and music:
+@export var bpm : float = 140.0
+@export var beats_per_anim : float = 2.0 # how long shall animation take
 @export var animated_sprite : AnimatedSprite2D
 
 
-@export var SPEED = 300.0
-@export var JUMP_VELOCITY = -400.0
+func _ready() -> void:
+	sync_animation_speed("run")
+	sync_animation_speed("jump")
 
 
 func _physics_process(delta: float) -> void:
@@ -42,3 +50,13 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
+
+func sync_animation_speed(anim_name : String):
+	var frames = animated_sprite.sprite_frames.get_frame_count(anim_name)
+	var fps = animated_sprite.sprite_frames.get_animation_speed(anim_name)
+	var sec_per_beat = 60.0 / bpm
+	var desired_duration = beats_per_anim * sec_per_beat
+	
+	var scale = (frames / fps) / desired_duration
+	animated_sprite.speed_scale = scale
+	#print(scale)

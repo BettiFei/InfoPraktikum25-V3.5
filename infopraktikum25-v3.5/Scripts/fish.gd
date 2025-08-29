@@ -3,6 +3,13 @@ extends Area2D
 
 signal caught # emitted when body in group "player" enters area2d of fish
 
+
+# variables to sync animations and soundtrack
+@export var bpm : float = 140.0
+@export var beats_per_anim : float = 4.0
+@export var animated_sprite : AnimatedSprite2D
+
+
 # variables to determine fish movement behaviour
 @export var move_distance : float = 5.0
 @export var step_chance_towards_player : float = 0.4
@@ -12,11 +19,15 @@ signal caught # emitted when body in group "player" enters area2d of fish
 @export var arena_min : Vector2 = Vector2(0,0) # top left
 @export var arena_max : Vector2 = Vector2(1024, 768) # bottom right
 
+
 var player : CharacterBody2D # connect in main scene
+
 
 
 func _ready():
 	randomize()
+	sync_animation_speed("jump")
+	sync_animation_speed("swim")
 
 
 func make_move():
@@ -30,13 +41,13 @@ func make_move():
 		#print("You're so slow. I'll wait.")
 		$Label.text = "So slow... I can wait."
 		$Label.show()
-		$AnimatedSprite2D.play("jump")
+		animated_sprite.play("jump")
 		return
 	
 	
 	var direction = Vector2.ZERO
 	$Label.hide()
-	$AnimatedSprite2D.play("swim")
+	animated_sprite.play("swim")
 	
 	
 	if randf() < step_chance_towards_player: # move towards player
@@ -80,9 +91,9 @@ func make_move():
 		
 		# flip sprite
 		if direction.x < 0:
-			$AnimatedSprite2D.flip_h = false
+			animated_sprite.flip_h = false
 		elif direction.x > 0:
-			$AnimatedSprite2D.flip_h = true
+			animated_sprite.flip_h = true
 
 
 func _on_body_entered(body: Node2D) -> void:
@@ -91,3 +102,14 @@ func _on_body_entered(body: Node2D) -> void:
 		caught.emit()
 		queue_free()
 		get_parent().fish = null
+
+
+func sync_animation_speed(anim_name : String):
+	var frames = animated_sprite.sprite_frames.get_frame_count(anim_name)
+	var fps = animated_sprite.sprite_frames.get_animation_speed(anim_name)
+	var sec_per_beat = 60.0 / bpm
+	var desired_duration = beats_per_anim * sec_per_beat
+	
+	var scale = (frames / fps) / desired_duration
+	animated_sprite.speed_scale = scale
+	#print(scale)

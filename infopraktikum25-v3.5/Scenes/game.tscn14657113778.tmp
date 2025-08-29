@@ -369,7 +369,6 @@ position = Vector2(359, 182)
 
 [node name="Fish" parent="." instance=ExtResource("8_ewbju")]
 position = Vector2(303, 221)
-beats_per_anim = 1.0
 move_distance = 10.0
 step_chance_towards_player = 0.0
 max_distance_from_player = 200.0

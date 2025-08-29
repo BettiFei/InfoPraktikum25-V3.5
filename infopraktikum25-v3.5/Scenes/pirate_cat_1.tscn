@@ -707,9 +707,9 @@ radius = 11.0454
 [node name="PirateCat1" type="CharacterBody2D" node_paths=PackedStringArray("animated_sprite") groups=["player"]]
 z_index = 5
 script = ExtResource("1_fq5i7")
-animated_sprite = NodePath("AnimatedSprite2D")
 SPEED = 180.0
 JUMP_VELOCITY = -300.0
+animated_sprite = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_c4h5d")
