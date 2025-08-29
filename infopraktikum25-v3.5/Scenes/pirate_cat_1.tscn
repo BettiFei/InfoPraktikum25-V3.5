@@ -703,7 +703,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_olnhc"]
 radius = 11.0454
 
-[node name="PirateCat1" type="CharacterBody2D" node_paths=PackedStringArray("animated_sprite")]
+[node name="PirateCat1" type="CharacterBody2D" node_paths=PackedStringArray("animated_sprite") groups=["player"]]
 z_index = 5
 script = ExtResource("1_fq5i7")
 animated_sprite = NodePath("AnimatedSprite2D")
