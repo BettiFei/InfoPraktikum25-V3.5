@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1hnwiy87pn5v"]
+
+[ext_resource type="Shader" uid="uid://cjma70wnuhhrb" path="res://assets/Shader/rainbow_shader.gdshader" id="2_whhjc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jgsew"]
+shader = ExtResource("2_whhjc")
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+shader_parameter/is_active = true
+
+[sub_resource type="Curve" id="Curve_jtsj6"]
+_data = [Vector2(0.0113636, 0.213483), 0.0, 7.69038, 0, 0, Vector2(0.255682, 1), 0.0, 0.0, 0, 0, Vector2(0.971591, 0.269663), 1.21348, 0.0, 0, 0]
+point_count = 3
+
+[node name="Confetti" type="CPUParticles2D"]
+material = SubResource("ShaderMaterial_jgsew")
+emitting = false
+amount = 50
+lifetime = 1.5
+one_shot = true
+explosiveness = 0.94
+randomness = 0.42
+lifetime_randomness = 0.5
+local_coords = true
+direction = Vector2(0, -1)
+spread = 30.45
+gravity = Vector2(0, 120)
+initial_velocity_min = 100.2
+initial_velocity_max = 170.9
+angular_velocity_min = -130.91
+angular_velocity_max = 160.0
+linear_accel_min = 6.06
+linear_accel_max = 11.11
+radial_accel_min = 6.06
+radial_accel_max = 6.06
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_jtsj6")

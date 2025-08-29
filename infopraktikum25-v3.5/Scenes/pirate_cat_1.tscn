@@ -1,8 +1,9 @@
-[gd_scene load_steps=98 format=3 uid="uid://c43qg0a2fvm7k"]
+[gd_scene load_steps=99 format=3 uid="uid://c43qg0a2fvm7k"]
 
 [ext_resource type="Script" uid="uid://5btxnjyeug1y" path="res://Scripts/pirate_cat_1.gd" id="1_fq5i7"]
 [ext_resource type="Texture2D" uid="uid://hdo3vrgismka" path="res://assets/Characters/PirateCats1.png" id="1_l0c36"]
 [ext_resource type="AudioStream" uid="uid://cffrvm7yqnkf6" path="res://assets/SFX/cat-meow-8-fx-306184.mp3" id="3_w30xx"]
+[ext_resource type="AudioStream" uid="uid://qxgo24omw2de" path="res://assets/SFX/Cat_Meow_Unhappy.mp3" id="4_8jcp4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fq5i7"]
 atlas = ExtResource("1_l0c36")
@@ -713,12 +714,26 @@ animated_sprite = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_c4h5d")
-animation = &"run"
+animation = &"sit"
 autoplay = "idle"
+frame_progress = 0.156058
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(3, 4)
 shape = SubResource("CircleShape2D_olnhc")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="ContentMeow" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_w30xx")
+
+[node name="SadMeow" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_8jcp4")
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.2
+
+[node name="JumpBufferTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
+[connection signal="timeout" from="JumpBufferTimer" to="." method="_on_jump_buffer_timer_timeout"]

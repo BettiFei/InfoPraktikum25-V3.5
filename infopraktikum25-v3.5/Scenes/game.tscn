@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://de5qux3xvb61r"]
+[gd_scene load_steps=17 format=4 uid="uid://de5qux3xvb61r"]
 
 [ext_resource type="Script" uid="uid://3sfvdmb8pd47" path="res://Scripts/game.gd" id="1_ldgsr"]
 [ext_resource type="FontFile" uid="uid://d0tu63hlvlpav" path="res://assets/Fonts/PixelOperator8.ttf" id="2_o5yvi"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c7shlham2b6mx" path="res://Scenes/fish.tscn" id="8_ewbju"]
 [ext_resource type="FontFile" uid="uid://bveddrkn8np3s" path="res://assets/Fonts/PixelOperator8-Bold.ttf" id="9_85qyi"]
 [ext_resource type="PackedScene" uid="uid://c43qg0a2fvm7k" path="res://Scenes/pirate_cat_1.tscn" id="10_iivbl"]
+[ext_resource type="PackedScene" uid="uid://cx165r7lvmh3j" path="res://UI/victory_label.tscn" id="11_o5yvi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2cgwh"]
 texture = ExtResource("3_rku1e")
@@ -295,11 +296,13 @@ sources/0 = SubResource("TileSetAtlasSource_i3aeo")
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_iaow0"]
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("midi_player", "countdown_timer", "countdown_label", "player", "fish", "platform")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("midi_player", "countdown_timer", "countdown_label", "end_timer", "victory_label", "player", "fish", "platform")]
 script = ExtResource("1_ldgsr")
 midi_player = NodePath("MidiPlayer")
 countdown_timer = NodePath("CountdownTimer")
 countdown_label = NodePath("PirateCat1/Camera2D/CountdownLabel")
+end_timer = NodePath("EndTimer")
+victory_label = NodePath("PirateCat1/Camera2D/VictoryLabel")
 player = NodePath("PirateCat1")
 fish = NodePath("Fish")
 platform = NodePath("Platforms/PlatformLong")
@@ -355,6 +358,10 @@ shape = SubResource("WorldBoundaryShape2D_iaow0")
 wait_time = 4.0
 one_shot = true
 
+[node name="EndTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
 [node name="ADSR" parent="." instance=ExtResource("6_nb51f")]
 autoplay = true
 
@@ -405,6 +412,10 @@ text = "00"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="VictoryLabel" parent="PirateCat1/Camera2D" instance=ExtResource("11_o5yvi")]
+
 [connection signal="timeout" from="CountdownTimer" to="." method="_on_countdown_timer_timeout"]
+[connection signal="timeout" from="EndTimer" to="." method="_on_end_timer_timeout"]
+[connection signal="finished" from="MidiPlayer" to="." method="_on_midi_player_finished"]
 [connection signal="midi_event" from="MidiPlayer" to="." method="_on_midi_player_midi_event"]
 [connection signal="caught" from="Fish" to="." method="_on_fish_caught"]
