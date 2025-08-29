@@ -1,7 +1,8 @@
-[gd_scene load_steps=97 format=3 uid="uid://c43qg0a2fvm7k"]
+[gd_scene load_steps=98 format=3 uid="uid://c43qg0a2fvm7k"]
 
 [ext_resource type="Script" uid="uid://5btxnjyeug1y" path="res://Scripts/pirate_cat_1.gd" id="1_fq5i7"]
 [ext_resource type="Texture2D" uid="uid://hdo3vrgismka" path="res://assets/Characters/PirateCats1.png" id="1_l0c36"]
+[ext_resource type="AudioStream" uid="uid://cffrvm7yqnkf6" path="res://assets/SFX/cat-meow-8-fx-306184.mp3" id="3_w30xx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fq5i7"]
 atlas = ExtResource("1_l0c36")
@@ -718,3 +719,6 @@ autoplay = "idle"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(3, 4)
 shape = SubResource("CircleShape2D_olnhc")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_w30xx")

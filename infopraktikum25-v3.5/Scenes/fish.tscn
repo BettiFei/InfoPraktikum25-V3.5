@@ -1,7 +1,8 @@
-[gd_scene load_steps=31 format=3 uid="uid://c7shlham2b6mx"]
+[gd_scene load_steps=32 format=3 uid="uid://c7shlham2b6mx"]
 
 [ext_resource type="Script" uid="uid://dmkm2dodalgle" path="res://Scripts/fish.gd" id="1_c4ibo"]
 [ext_resource type="Texture2D" uid="uid://d0clqkhjtgo6u" path="res://assets/Interactable/Blobfish Spritesheet.png" id="2_c4ibo"]
+[ext_resource type="FontFile" uid="uid://bveddrkn8np3s" path="res://assets/Fonts/PixelOperator8-Bold.ttf" id="3_4fqy1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4fqy1"]
 atlas = ExtResource("2_c4ibo")
@@ -238,8 +239,7 @@ scale = Vector2(0.625, 0.625)
 sprite_frames = SubResource("SpriteFrames_qa415")
 animation = &"jump"
 autoplay = "jump"
-frame = 7
-frame_progress = 1.0
+frame_progress = 0.617247
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_c4ibo")
@@ -248,5 +248,14 @@ shape = SubResource("CircleShape2D_c4ibo")
 libraries = {
 &"": SubResource("AnimationLibrary_4fqy1")
 }
+
+[node name="Label" type="Label" parent="."]
+offset_left = -64.0
+offset_top = -17.0
+offset_right = 75.0
+offset_bottom = -6.0
+theme_override_fonts/font = ExtResource("3_4fqy1")
+theme_override_font_sizes/font_size = 8
+text = "Catch me if you can!"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
