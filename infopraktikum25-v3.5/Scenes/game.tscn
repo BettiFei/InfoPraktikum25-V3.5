@@ -413,6 +413,7 @@ position = Vector2(10, 412)
 position = Vector2(505, 262)
 
 [node name="CountdownTimer" type="Timer" parent="."]
+wait_time = 4.0
 one_shot = true
 
 [node name="EndTimer" type="Timer" parent="."]
