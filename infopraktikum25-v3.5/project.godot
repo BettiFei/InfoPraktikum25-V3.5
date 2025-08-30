@@ -23,6 +23,7 @@ window/size/viewport_height=360
 [global_group]
 
 player=""
+platform=""
 
 [input]
 

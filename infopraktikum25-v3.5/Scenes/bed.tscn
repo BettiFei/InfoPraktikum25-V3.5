@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://b76g7ysksqjpl"]
+
+[ext_resource type="Texture2D" uid="uid://t1vrrj5713ro" path="res://assets/Setting/CatBedRed.png" id="1_yfxyx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8uqln"]
+size = Vector2(38, 10)
+
+[node name="Bed" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.813, 0.813)
+texture = ExtResource("1_yfxyx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 7)
+shape = SubResource("RectangleShape2D_8uqln")

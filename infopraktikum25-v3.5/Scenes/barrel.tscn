@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0myrsjraf4rv"]
+
+[ext_resource type="Texture2D" uid="uid://c7p1uaq03ttsd" path="res://assets/Setting/object_barrel_heavy_idle.png" id="1_3w4xy"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m5w3l"]
+radius = 8.0
+height = 20.0
+
+[node name="Barrel" type="RigidBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_3w4xy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_m5w3l")

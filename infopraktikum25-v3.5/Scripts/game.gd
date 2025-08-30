@@ -32,15 +32,16 @@ var victorious := false
 
 func _ready() -> void:
 	victory_label.hide()
+	
+	fish.player = player
+	
+	# Prepare to reset positions upon death:
 	killzone.killzone_timer_timeout.connect(reset_positions)
 	player_start_position = player.global_position
 	fish_start_position = fish.global_position
 	
-	fish.player = player
-	
 	# Save information from player and set movement to 0:
 	block_movement()
-
 	
 	countdown_timer.start()
 
@@ -64,8 +65,12 @@ func block_movement():
 
 
 func reset_positions():
+	#player.get_node("CollisionShape2D").set_deferred("disabled", false)
 	player.global_position = player_start_position
-	fish.global_position = fish_start_position
+	if fish != null:
+		fish.global_position = fish_start_position
+	else:
+		return
 
 
 # -- MIDIPLAYER STUFF --
@@ -88,8 +93,11 @@ func _on_midi_player_midi_event(channel: Variant, event: Variant) -> void:
 func _on_midi_player_finished() -> void:
 	end_timer.start()
 	if victorious == false:
+		victory_label.get_node("Label").text = "Fish got away ..."
+		victory_label.show()
 		player.get_node("SadMeow").play()
 # -- MIDIPLAYER STUFF DONE --
+
 
 # Setup & start game.
 func _on_countdown_timer_timeout() -> void:
@@ -102,6 +110,7 @@ func _on_countdown_timer_timeout() -> void:
 	player.JUMP_VELOCITY = player_base_jump_vel
 	midi_player.play()
 
+
 # Victory
 func _on_fish_caught() -> void:
 	end_timer.start()
@@ -113,6 +122,7 @@ func _on_fish_caught() -> void:
 	victorious = true
 
 
+# Handle end of game.
 func _on_end_timer_timeout() -> void:
 	if victorious == true:
 		get_tree().change_scene_to_file("res://Scenes/victory.tscn")

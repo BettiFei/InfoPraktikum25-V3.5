@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8q6su"]
 size = Vector2(30, 8)
 
-[node name="PlatformLong" type="AnimatableBody2D"]
+[node name="Platform" type="AnimatableBody2D" groups=["platform"]]
 z_index = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
