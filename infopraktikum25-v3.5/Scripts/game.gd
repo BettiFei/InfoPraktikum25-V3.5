@@ -4,6 +4,7 @@ extends Node2D
 # Technical elements.
 @export_group("Technical Elements")
 @export var midi_player : MidiPlayer
+@export var killzone : Area2D
 @export var countdown_timer : Timer
 @export var countdown_label : Label
 @export var end_timer : Timer
@@ -19,6 +20,8 @@ extends Node2D
 # Save information.
 var player_base_speed = 0.0
 var player_base_jump_vel = 0.0
+var player_start_position : Vector2
+var fish_start_position : Vector2
 
 # Track movement status of game elements.
 var moved_platform = false
@@ -29,15 +32,15 @@ var victorious := false
 
 func _ready() -> void:
 	victory_label.hide()
+	killzone.killzone_timer_timeout.connect(reset_positions)
+	player_start_position = player.global_position
+	fish_start_position = fish.global_position
 	
 	fish.player = player
 	
 	# Save information from player and set movement to 0:
 	block_movement()
-	#player_base_speed = player.SPEED
-	#player_base_jump_vel = player.JUMP_VELOCITY
-	#player.SPEED = 0.0
-	#player.JUMP_VELOCITY = 0.0
+
 	
 	countdown_timer.start()
 
@@ -58,6 +61,11 @@ func block_movement():
 	player_base_jump_vel = player.JUMP_VELOCITY
 	player.SPEED = 0.0
 	player.JUMP_VELOCITY = 0.0
+
+
+func reset_positions():
+	player.global_position = player_start_position
+	fish.global_position = fish_start_position
 
 
 # -- MIDIPLAYER STUFF --

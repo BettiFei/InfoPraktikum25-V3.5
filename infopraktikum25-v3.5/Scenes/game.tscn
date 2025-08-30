@@ -296,9 +296,10 @@ sources/0 = SubResource("TileSetAtlasSource_i3aeo")
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_iaow0"]
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("midi_player", "countdown_timer", "countdown_label", "end_timer", "victory_label", "player", "fish", "platform")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("midi_player", "killzone", "countdown_timer", "countdown_label", "end_timer", "victory_label", "player", "fish", "platform")]
 script = ExtResource("1_ldgsr")
 midi_player = NodePath("MidiPlayer")
+killzone = NodePath("Worldbuilding/Killzone")
 countdown_timer = NodePath("CountdownTimer")
 countdown_label = NodePath("PirateCat1/Camera2D/CountdownLabel")
 end_timer = NodePath("EndTimer")
