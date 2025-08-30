@@ -6,7 +6,7 @@
 radius = 8.0
 height = 20.0
 
-[node name="Barrel" type="RigidBody2D"]
+[node name="Barrel" type="StaticBody2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_3w4xy")

@@ -39,7 +39,7 @@ func make_move():
 	var distance = global_position.distance_to(player.global_position)
 	if distance > max_distance_from_player:
 		#print("You're so slow. I'll wait.")
-		$Label.text = "So slow... I can wait."
+		$Label.text = "so slow... i can wait."
 		$Label.show()
 		animated_sprite.play("jump")
 		return
@@ -98,7 +98,7 @@ func make_move():
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		print("Cat caught the fish.")
+		#print("Cat caught the fish.")
 		caught.emit()
 		queue_free()
 		get_parent().fish = null

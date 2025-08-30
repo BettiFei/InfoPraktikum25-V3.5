@@ -23,8 +23,6 @@ var player_base_jump_vel = 0.0
 var player_start_position : Vector2
 var fish_start_position : Vector2
 
-# Track movement status of game elements.
-var moved_platform = false
 
 # Handle transition to end of game.
 var victorious := false
@@ -81,19 +79,14 @@ func _on_midi_player_midi_event(channel: Variant, event: Variant) -> void:
 			fish.make_move()
 	
 	
-	if channel.number == 0:
-		if event.type == 144:
-			if moved_platform == false:
-				platform.global_position.y += 20
-				moved_platform = true
-			elif moved_platform == true:
-				platform.global_position.y -= 20
-				moved_platform = false
+	if channel.number == 0 and event.type == 144:
+		for p in get_tree().get_nodes_in_group("platform"):
+			p.make_move()
 	
 func _on_midi_player_finished() -> void:
 	end_timer.start()
 	if victorious == false:
-		victory_label.get_node("Label").text = "Fish got away ..."
+		victory_label.get_node("Label").text = "FISH GOT AWAY ..."
 		victory_label.show()
 		player.get_node("SadMeow").play()
 # -- MIDIPLAYER STUFF DONE --
