@@ -1,9 +1,15 @@
-[gd_scene load_steps=99 format=3 uid="uid://c43qg0a2fvm7k"]
+[gd_scene load_steps=101 format=3 uid="uid://c43qg0a2fvm7k"]
 
 [ext_resource type="Script" uid="uid://5btxnjyeug1y" path="res://Scripts/pirate_cat_1.gd" id="1_fq5i7"]
 [ext_resource type="Texture2D" uid="uid://hdo3vrgismka" path="res://assets/Characters/PirateCats1.png" id="1_l0c36"]
+[ext_resource type="Shader" uid="uid://das0bflhka4wh" path="res://assets/Shader/outline_shader.gdshader" id="1_n30d8"]
 [ext_resource type="AudioStream" uid="uid://cffrvm7yqnkf6" path="res://assets/SFX/cat-meow-8-fx-306184.mp3" id="3_w30xx"]
 [ext_resource type="AudioStream" uid="uid://qxgo24omw2de" path="res://assets/SFX/Cat_Meow_Unhappy.mp3" id="4_8jcp4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f1868"]
+shader = ExtResource("1_n30d8")
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_thickness = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fq5i7"]
 atlas = ExtResource("1_l0c36")
@@ -707,6 +713,7 @@ radius = 11.0454
 
 [node name="PirateCat1" type="CharacterBody2D" node_paths=PackedStringArray("animated_sprite") groups=["player"]]
 z_index = 5
+material = SubResource("ShaderMaterial_f1868")
 script = ExtResource("1_fq5i7")
 SPEED = 180.0
 JUMP_VELOCITY = -300.0

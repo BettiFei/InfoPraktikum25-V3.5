@@ -11,7 +11,7 @@ uniform bool is_active = false;
 
 void fragment() {
 	if (is_active) {
-		float hue = UV.x * cos(radians(angle)) - UV.y * sin(radians(angle));
+		float hue = SCREEN_UV.x * cos(radians(angle)) - SCREEN_UV.y * sin(radians(angle));
 		hue = fract(hue + fract(TIME  * speed));
 		float x = 1. - abs(mod(hue / (1./ 6.), 2.) - 1.);
 		vec3 rainbow;
